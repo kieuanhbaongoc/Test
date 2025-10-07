@@ -7,19 +7,15 @@ let userData = {
     badges: {},
     completedActivities: {},
     customActivities: [],
-    // REMOVED: loginStreak: 0,
     underLimitStreak: 0,
     learningStreak: 0,
     readingStreak: 0,
     exerciseStreak: 0,
-    // REMOVED: checkinStreak: 0,
-    // REMOVED: lastCheckinDate: null,
-    // REMOVED: checkinHistory: {}, // Removed check-in history
     quizScores: { physical: 0, mental: 0, concentration: 0 },
     quizHistory: [],
     lastLoginDate: null,
     lastActivityDate: null,
-    activityHistory: {} // This is for completed activities, kept
+    activityHistory: {}
 };
 
 const todayIndex = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
@@ -55,10 +51,6 @@ const allBadges = [
     { id: 'dependency_low_50', name: 'Tự chủ số', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 50%', icon: '⚖️' },
     { id: 'dependency_low_40', name: 'Giải phóng', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 40%', icon: '🕊️' },
     { id: 'dependency_low_30', name: 'Chủ nhân cuộc sống', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 30%', icon: '🔮' },
-    // REMOVED: Login streak badges
-    // { id: 'login_streak_5', name: 'Kiên trì 5', description: 'Đăng nhập 5 ngày liên tiếp', icon: '🔥' },
-    // { id: 'login_streak_10', name: 'Kiên trì 10', description: 'Đăng nhập 10 ngày liên tiếp', icon: '⚡' },
-    // { id: 'login_streak_20', name: 'Kiên trì 20', description: 'Đăng nhập 20 ngày liên tiếp', icon: '🚀' },
     { id: 'learning_streak_5', name: 'Chuỗi học tập 5', description: 'Hoàn thành hoạt động học tập 5 ngày liên tiếp', icon: '📖' },
     { id: 'learning_streak_10', name: 'Chuỗi học tập 10', description: 'Hoàn thành hoạt động học tập 10 ngày liên tiếp', icon: '🎓' },
     { id: 'reading_streak_5', name: 'Chuỗi đọc sách 5', description: 'Hoàn thành hoạt động đọc sách 5 ngày liên tiếp', icon: '📕' },
@@ -66,10 +58,6 @@ const allBadges = [
     { id: 'exercise_streak_5', name: 'Chuỗi tập thể dục 5', description: 'Hoàn thành hoạt động tập thể dục 5 ngày liên tiếp', icon: '💪' },
     { id: 'exercise_streak_10', name: 'Chuỗi tập thể dục 10', description: 'Hoàn thành hoạt động tập thể dục 10 ngày liên tiếp', icon: '🏋️' },
     { id: 'custom_activity', name: 'Sáng tạo', description: 'Thêm một hoạt động lành mạnh của riêng bạn', icon: '🎨' },
-    // REMOVED: Check-in streak badges
-    // { id: 'checkin_streak_5', name: 'Điểm danh 5 ngày', description: 'Điểm danh 5 ngày liên tiếp', icon: '📅' },
-    // { id: 'checkin_streak_10', name: 'Điểm danh 10 ngày', description: 'Điểm danh 10 ngày liên tiếp', icon: '📆' },
-    // { id: 'checkin_streak_20', name: 'Điểm danh 20 ngày', description: 'Điểm danh 20 ngày liên tiếp', icon: '🗓️' },
 ];
 
 const quizQuestions = {
@@ -131,20 +119,6 @@ function initLocalStorage() {
             userData.activityHistory = {};
             saveData();
         }
-        
-        // REMOVED: Initialization for check-in related properties
-        // if (!userData.checkinHistory) {
-        //     userData.checkinHistory = {};
-        //     saveData();
-        // }
-        // if (userData.checkinStreak === undefined) {
-        //     userData.checkinStreak = 0;
-        //     saveData();
-        // }
-        // if (!userData.lastCheckinDate) {
-        //     userData.lastCheckinDate = null;
-        //     saveData();
-        // }
     } else {
         saveData();
     }
@@ -287,9 +261,6 @@ function updateActivityHistory() {
     `).join('');
 }
 
-// REMOVED: The entire function for check-in streak visualization
-// function updateCheckinStreakVisualization() { ... }
-
 // Initialize app
 function initApp() {
     const loadingSpinner = document.getElementById('loading-spinner');
@@ -339,15 +310,6 @@ function updateMainUI() {
             <input type="number" id="input-${app.id}" placeholder="${app.name} (phút)" value="${(userData.appUsage[app.id] && userData.appUsage[app.id][todayIndex]) || 0}" class="flex-grow rounded-lg px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400">
         </div>
     `).join('');
-
-    // REMOVED: Update check-in button logic
-    // const today = new Date().toISOString().slice(0, 10);
-    // const hasCheckedInToday = userData.checkinHistory[today] || false;
-    // const checkinBtn = document.getElementById('checkin-btn');
-    // if (checkinBtn) { ... }
-
-    // REMOVED: Call to update check-in streak visualization
-    // updateCheckinStreakVisualization();
 
     // Update activities
     const allActivities = defaultHealthyActivities.concat(userData.customActivities || []);
@@ -684,9 +646,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateMainUI();
         }
     });
-
-    // REMOVED: The entire event listener for the check-in button
-    // document.getElementById('checkin-btn')?.addEventListener('click', async () => { ... });
 
     document.addEventListener('click', async (e) => {
         if (e.target.matches('.complete-activity-btn')) {
