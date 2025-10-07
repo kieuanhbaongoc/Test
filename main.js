@@ -7,19 +7,19 @@ let userData = {
     badges: {},
     completedActivities: {},
     customActivities: [],
-    loginStreak: 0,
+    // REMOVED: loginStreak: 0,
     underLimitStreak: 0,
     learningStreak: 0,
     readingStreak: 0,
     exerciseStreak: 0,
-    checkinStreak: 0,
-    lastCheckinDate: null,
-    checkinHistory: {}, // New property to store check-in history
+    // REMOVED: checkinStreak: 0,
+    // REMOVED: lastCheckinDate: null,
+    // REMOVED: checkinHistory: {}, // Removed check-in history
     quizScores: { physical: 0, mental: 0, concentration: 0 },
     quizHistory: [],
     lastLoginDate: null,
     lastActivityDate: null,
-    activityHistory: {} // New property to store activity history
+    activityHistory: {} // This is for completed activities, kept
 };
 
 const todayIndex = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
@@ -55,9 +55,10 @@ const allBadges = [
     { id: 'dependency_low_50', name: 'Tự chủ số', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 50%', icon: '⚖️' },
     { id: 'dependency_low_40', name: 'Giải phóng', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 40%', icon: '🕊️' },
     { id: 'dependency_low_30', name: 'Chủ nhân cuộc sống', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 30%', icon: '🔮' },
-    { id: 'login_streak_5', name: 'Kiên trì 5', description: 'Đăng nhập 5 ngày liên tiếp', icon: '🔥' },
-    { id: 'login_streak_10', name: 'Kiên trì 10', description: 'Đăng nhập 10 ngày liên tiếp', icon: '⚡' },
-    { id: 'login_streak_20', name: 'Kiên trì 20', description: 'Đăng nhập 20 ngày liên tiếp', icon: '🚀' },
+    // REMOVED: Login streak badges
+    // { id: 'login_streak_5', name: 'Kiên trì 5', description: 'Đăng nhập 5 ngày liên tiếp', icon: '🔥' },
+    // { id: 'login_streak_10', name: 'Kiên trì 10', description: 'Đăng nhập 10 ngày liên tiếp', icon: '⚡' },
+    // { id: 'login_streak_20', name: 'Kiên trì 20', description: 'Đăng nhập 20 ngày liên tiếp', icon: '🚀' },
     { id: 'learning_streak_5', name: 'Chuỗi học tập 5', description: 'Hoàn thành hoạt động học tập 5 ngày liên tiếp', icon: '📖' },
     { id: 'learning_streak_10', name: 'Chuỗi học tập 10', description: 'Hoàn thành hoạt động học tập 10 ngày liên tiếp', icon: '🎓' },
     { id: 'reading_streak_5', name: 'Chuỗi đọc sách 5', description: 'Hoàn thành hoạt động đọc sách 5 ngày liên tiếp', icon: '📕' },
@@ -65,9 +66,10 @@ const allBadges = [
     { id: 'exercise_streak_5', name: 'Chuỗi tập thể dục 5', description: 'Hoàn thành hoạt động tập thể dục 5 ngày liên tiếp', icon: '💪' },
     { id: 'exercise_streak_10', name: 'Chuỗi tập thể dục 10', description: 'Hoàn thành hoạt động tập thể dục 10 ngày liên tiếp', icon: '🏋️' },
     { id: 'custom_activity', name: 'Sáng tạo', description: 'Thêm một hoạt động lành mạnh của riêng bạn', icon: '🎨' },
-    { id: 'checkin_streak_5', name: 'Điểm danh 5 ngày', description: 'Điểm danh 5 ngày liên tiếp', icon: '📅' },
-    { id: 'checkin_streak_10', name: 'Điểm danh 10 ngày', description: 'Điểm danh 10 ngày liên tiếp', icon: '📆' },
-    { id: 'checkin_streak_20', name: 'Điểm danh 20 ngày', description: 'Điểm danh 20 ngày liên tiếp', icon: '🗓️' },
+    // REMOVED: Check-in streak badges
+    // { id: 'checkin_streak_5', name: 'Điểm danh 5 ngày', description: 'Điểm danh 5 ngày liên tiếp', icon: '📅' },
+    // { id: 'checkin_streak_10', name: 'Điểm danh 10 ngày', description: 'Điểm danh 10 ngày liên tiếp', icon: '📆' },
+    // { id: 'checkin_streak_20', name: 'Điểm danh 20 ngày', description: 'Điểm danh 20 ngày liên tiếp', icon: '🗓️' },
 ];
 
 const quizQuestions = {
@@ -130,23 +132,19 @@ function initLocalStorage() {
             saveData();
         }
         
-        // Initialize checkinHistory if it doesn't exist
-        if (!userData.checkinHistory) {
-            userData.checkinHistory = {};
-            saveData();
-        }
-        
-        // Initialize checkinStreak if it doesn't exist
-        if (userData.checkinStreak === undefined) {
-            userData.checkinStreak = 0;
-            saveData();
-        }
-        
-        // Initialize lastCheckinDate if it doesn't exist
-        if (!userData.lastCheckinDate) {
-            userData.lastCheckinDate = null;
-            saveData();
-        }
+        // REMOVED: Initialization for check-in related properties
+        // if (!userData.checkinHistory) {
+        //     userData.checkinHistory = {};
+        //     saveData();
+        // }
+        // if (userData.checkinStreak === undefined) {
+        //     userData.checkinStreak = 0;
+        //     saveData();
+        // }
+        // if (!userData.lastCheckinDate) {
+        //     userData.lastCheckinDate = null;
+        //     saveData();
+        // }
     } else {
         saveData();
     }
@@ -289,36 +287,8 @@ function updateActivityHistory() {
     `).join('');
 }
 
-// Update check-in streak visualization
-function updateCheckinStreakVisualization() {
-    const container = document.getElementById('checkin-streak-container');
-    if (!container) return;
-    
-    // Get the last 7 days
-    const days = [];
-    const today = new Date();
-    
-    for (let i = 6; i >= 0; i--) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - i);
-        days.push(date.toISOString().slice(0, 10));
-    }
-    
-    // Day names
-    const dayNames = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
-    
-    container.innerHTML = days.map((dateStr, index) => {
-        const dayName = dayNames[new Date(dateStr).getDay()];
-        const hasCheckedIn = userData.checkinHistory[dateStr] || false;
-        
-        return `
-            <div class="day-item">
-                <i class="fas fa-fire fire-icon ${hasCheckedIn ? 'fire-active' : 'fire-inactive'}"></i>
-                <span class="text-xs text-gray-600">${dayName}</span>
-            </div>
-        `;
-    }).join('');
-}
+// REMOVED: The entire function for check-in streak visualization
+// function updateCheckinStreakVisualization() { ... }
 
 // Initialize app
 function initApp() {
@@ -370,25 +340,14 @@ function updateMainUI() {
         </div>
     `).join('');
 
-    // Update check-in button
-    const today = new Date().toISOString().slice(0, 10);
-    const hasCheckedInToday = userData.checkinHistory[today] || false;
-    const checkinBtn = document.getElementById('checkin-btn');
-    
-    if (checkinBtn) {
-        if (hasCheckedInToday) {
-            checkinBtn.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Đã Điểm Danh Hôm Nay';
-            checkinBtn.classList.add('opacity-75', 'cursor-not-allowed');
-            checkinBtn.disabled = true;
-        } else {
-            checkinBtn.innerHTML = '<i class="fas fa-calendar-check mr-2"></i> Điểm Danh Hàng Ngày';
-            checkinBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-            checkinBtn.disabled = false;
-        }
-    }
+    // REMOVED: Update check-in button logic
+    // const today = new Date().toISOString().slice(0, 10);
+    // const hasCheckedInToday = userData.checkinHistory[today] || false;
+    // const checkinBtn = document.getElementById('checkin-btn');
+    // if (checkinBtn) { ... }
 
-    // Update check-in streak visualization
-    updateCheckinStreakVisualization();
+    // REMOVED: Call to update check-in streak visualization
+    // updateCheckinStreakVisualization();
 
     // Update activities
     const allActivities = defaultHealthyActivities.concat(userData.customActivities || []);
@@ -726,34 +685,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Check-in button event listener
-    document.getElementById('checkin-btn')?.addEventListener('click', async () => {
-        const today = new Date().toISOString().slice(0, 10);
-        
-        // Check if already checked in today
-        if (userData.checkinHistory[today]) {
-            showNotification("Đã Điểm Danh", "Bạn đã điểm danh hôm nay rồi!");
-            return;
-        }
-        
-        // Update check-in history
-        userData.checkinHistory[today] = true;
-        
-        // Update check-in streak
-        const lastCheckinDate = userData.lastCheckinDate;
-        const isSequential = (lastCheckinDate && (new Date(today) - new Date(lastCheckinDate)) / (1000 * 60 * 60 * 24) === 1);
-        userData.checkinStreak = isSequential ? (userData.checkinStreak || 0) + 1 : 1;
-        userData.lastCheckinDate = today;
-        
-        // Award badges based on streak
-        if (userData.checkinStreak >= 5) awardBadge('checkin_streak_5');
-        if (userData.checkinStreak >= 10) awardBadge('checkin_streak_10');
-        if (userData.checkinStreak >= 20) awardBadge('checkin_streak_20');
-        
-        saveData();
-        showNotification("Điểm Danh Thành Công!", `Bạn đã điểm danh ${userData.checkinStreak} ngày liên tiếp!`);
-        updateMainUI();
-    });
+    // REMOVED: The entire event listener for the check-in button
+    // document.getElementById('checkin-btn')?.addEventListener('click', async () => { ... });
 
     document.addEventListener('click', async (e) => {
         if (e.target.matches('.complete-activity-btn')) {
