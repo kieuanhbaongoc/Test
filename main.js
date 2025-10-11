@@ -531,7 +531,7 @@ function getQuizResultEvaluation(scores) {
         </div>
         
         <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
-            <h5 class="font-bold text-lg mb-2">Phần 4: Lời khuyên Tổng thể</h5>
+            <h5 class="font-bold text-lg mb-2">Phần 3: Lời khuyên Tổng thể</h5>
             ${finalDependencyPercentage <= 30 ? `
             <p class="mb-1">🟢 <strong>Mức độ: Phụ thuộc thấp</strong></p>
             <p class="text-sm pl-4 text-gray-600">Bạn đang làm rất tốt. Điểm số cao thể hiện bạn đã đạt đến trạng thái tự chủ kỹ thuật số – sử dụng công nghệ như công cụ hỗ trợ, không phải nguồn dopamine chính.<br>Hãy duy trì thói quen lành mạnh này bằng cách thường xuyên “detox thông tin”: tạm rời xa mạng xã hội 1 ngày mỗi tuần, dành thời gian cho thiên nhiên, sáng tạo, và tương tác thật. Đây là cách tốt nhất để duy trì sự tự do tinh thần trong kỷ nguyên số.</p>
