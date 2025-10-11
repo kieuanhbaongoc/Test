@@ -493,7 +493,7 @@ function getQuizResultEvaluation(scores) {
         <div class="p-4 bg-white rounded-lg shadow-inner">
             <h5 class="font-bold text-lg mb-2"> Phần 2: Phân tích chi tiết từng khía cạnh</h5>
             
-            <h6 class="font-semibold text-md mb-2">2.1. Sức khỏe Thể chất (Physical)</h6>
+            <h6 class="font-semibold text-md mb-2">Sức khỏe Thể chất (Physical)</h6>
             ${physical >= 15 ? `
             <p class="mb-1">🟢 <strong>Mức độ: Đang ở mức tốt</strong> (Điểm: ${physical}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Bạn đang duy trì được một nền tảng thể chất ổn định. Các biểu hiện tiêu cực như đau đầu, mỏi mắt hay rối loạn giấc ngủ do sử dụng thiết bị điện tử dường như không đáng kể. Điều này chứng tỏ bạn đã hình thành thói quen cân bằng giữa thời gian trước màn hình và hoạt động thể chất, giúp cơ thể có thời gian phục hồi năng lượng.<br>Đây là minh chứng cho sự tự điều chỉnh hành vi sử dụng công nghệ – một yếu tố quan trọng trong việc giảm thiểu ảnh hưởng của “dopamine loop” (vòng lặp dopamine) từ các nền tảng mạng xã hội.</p>
@@ -505,7 +505,7 @@ function getQuizResultEvaluation(scores) {
             <p class="text-sm pl-4 mb-2 text-gray-600">Điểm số thấp cho thấy sức khỏe thể chất của bạn đang bị tổn hại rõ rệt. Tình trạng mệt mỏi, giảm thị lực, đau cơ hoặc mất ngủ có thể là hệ quả của việc tiếp xúc liên tục với kích thích số mà không có giai đoạn phục hồi.<br>Khi cơ thể rơi vào trạng thái này, não bộ sẽ tiết dopamine liên tục để duy trì cảm giác “hoạt động”, dẫn đến mệt mỏi mãn tính và suy giảm thể lực. Đây là thời điểm bạn cần thiết lập giới hạn công nghệ cá nhân: giảm thời gian dùng mạng, tăng vận động thể chất và ưu tiên giấc ngủ chất lượng để khôi phục trạng thái cân bằng sinh học.</p>
             `)}
 
-            <h6 class="font-semibold text-md mb-2 mt-4">2.2. Sức khỏe Tinh thần (Mental)</h6>
+            <h6 class="font-semibold text-md mb-2 mt-4">Sức khỏe Tinh thần (Mental)</h6>
             ${mental >= 15 ? `
             <p class="mb-1">🟢 <strong>Mức độ: Rất ổn định</strong> (Điểm: ${mental}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Bạn đang sở hữu một trạng thái tâm lý vững vàng. Bạn ít bị chi phối bởi hiệu ứng “so sánh xã hội” (social comparison effect) và không quá lo lắng khi không cập nhật xu hướng mới. Điều này cho thấy bạn đã xây dựng được hàng rào nhận thức vững chắc trước các kích thích cảm xúc từ mạng xã hội – yếu tố nền tảng giúp duy trì cảm xúc tích cực và lòng tự trọng ổn định.<br>Đây là dấu hiệu của sức khỏe tinh thần kỹ thuật số (digital mental wellness), giúp bạn sử dụng công nghệ như công cụ phục vụ cuộc sống, chứ không phải để xác định giá trị bản thân.</p>
@@ -517,7 +517,7 @@ function getQuizResultEvaluation(scores) {
             <p class="text-sm pl-4 mb-2 text-gray-600">Điểm số này cho thấy bạn đang trải qua mức độ căng thẳng hoặc lo âu cao liên quan đến việc sử dụng mạng xã hội. Cảm giác trống rỗng, mất tập trung, hoặc sợ bị lãng quên là dấu hiệu của dopamine burnout – khi não đã quen với việc được kích thích liên tục.<br>Lúc này, điều cần thiết là can thiệp cảm xúc tích cực: hạn chế tiếp xúc nội dung tiêu cực, nói chuyện với người thân hoặc tìm đến chuyên gia tâm lý để được hướng dẫn cách tái tạo năng lượng tinh thần và thoát khỏi sự phụ thuộc cảm xúc vào môi trường ảo.</p>
             `)}
 
-            <h6 class="font-semibold text-md mb-2 mt-4">2.3. Mức độ Tập trung (Concentration)</h6>
+            <h6 class="font-semibold text-md mb-2 mt-4">Mức độ Tập trung (Concentration)</h6>
             ${concentration >= 15 ? `
             <p class="mb-1">🟢 <strong>Mức độ: Rất tốt</strong> (Điểm: ${concentration}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Bạn có khả năng duy trì sự tập trung bền vững, phản ánh việc não bộ hoạt động ở trạng thái kiểm soát chứ không bị cuốn vào dòng chảy thông tin liên tục. Đây là một dấu hiệu đáng quý trong thời đại kỹ thuật số, cho thấy bạn đang sử dụng dopamine một cách có ý thức – chỉ kích hoạt khi cần thiết cho học tập và công việc.<br>Hãy tiếp tục phát huy bằng cách duy trì khoảng thời gian “deep work” (làm việc sâu), nơi bạn loại bỏ hoàn toàn thông báo và tập trung tuyệt đối vào một nhiệm vụ.</p>
