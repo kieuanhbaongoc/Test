@@ -491,7 +491,7 @@ function getQuizResultEvaluation(scores) {
     let evaluationDetails = `
         <p><strong>Điểm phụ thuộc mạng xã hội của bạn là <span class="text-indigo-600 font-bold">${formattedDependencyPercentage}%</span>.</strong> Để hiểu rõ hơn về con số này, chúng ta hãy cùng phân tích chi tiết kết quả của bạn ở từng khía cạnh.</p>
         <div class="p-4 bg-white rounded-lg shadow-inner">
-            <h5 class="font-bold text-lg mb-2">⚙️ Phần 2: Phân tích chi tiết từng khía cạnh</h5>
+            <h5 class="font-bold text-lg mb-2"> Phần 2: Phân tích chi tiết từng khía cạnh</h5>
             
             <h6 class="font-semibold text-md mb-2">2.1. Sức khỏe Thể chất (Physical)</h6>
             ${physical >= 15 ? `
@@ -533,13 +533,13 @@ function getQuizResultEvaluation(scores) {
         <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
             <h5 class="font-bold text-lg mb-2">Phần 4: Lời khuyên Tổng thể</h5>
             ${finalDependencyPercentage <= 30 ? `
-            <p class="mb-1">🟢 <strong>Mức độ: Sức khỏe kỹ thuật số tốt</strong></p>
+            <p class="mb-1">🟢 <strong>Mức độ: Phụ thuộc </strong></p>
             <p class="text-sm pl-4 text-gray-600">Bạn đang làm rất tốt. Điểm số cao thể hiện bạn đã đạt đến trạng thái tự chủ kỹ thuật số – sử dụng công nghệ như công cụ hỗ trợ, không phải nguồn dopamine chính.<br>Hãy duy trì thói quen lành mạnh này bằng cách thường xuyên “detox thông tin”: tạm rời xa mạng xã hội 1 ngày mỗi tuần, dành thời gian cho thiên nhiên, sáng tạo, và tương tác thật. Đây là cách tốt nhất để duy trì sự tự do tinh thần trong kỷ nguyên số.</p>
             ` : (finalDependencyPercentage <= 60 ? `
-            <p class="mb-1">🟡 <strong>Mức độ: Sức khỏe kỹ thuật số trung bình</strong></p>
+            <p class="mb-1">🟡 <strong>Mức độ: Phụ thuộc trung bình</strong></p>
             <p class="text-sm pl-4 text-gray-600">Bạn đang ở giai đoạn chuyển tiếp giữa thói quen và nhận thức. Mức độ phụ thuộc ở mức vừa phải, cho thấy bạn đã bắt đầu kiểm soát được thói quen, nhưng đôi khi vẫn để mạng xã hội ảnh hưởng cảm xúc.<br>Hãy xây dựng lịch sử dụng mạng có mục đích: chỉ truy cập khi cần, giới hạn thời gian, và ưu tiên hoạt động ngoại tuyến. Việc này giúp não bộ tái học cách tìm niềm vui từ thế giới thật.</p>
             ` : `
-            <p class="mb-1">🔴 <strong>Mức độ: Cần cải thiện sức khỏe kỹ thuật số</strong></p>
+            <p class="mb-1">🔴 <strong>Mức độ: Phụ thuộc cao</strong></p>
             <p class="text-sm pl-4 text-gray-600">Điểm số cho thấy mạng xã hội đang chi phối đáng kể hành vi và cảm xúc của bạn. Dù bạn có thể vẫn duy trì sức khỏe tốt, nhưng não bộ đã quen với việc tìm kiếm kích thích tức thời.<br>Hãy bắt đầu bằng việc giảm 10% thời gian sử dụng mỗi tuần, thay thế bằng các hoạt động mang lại dopamine tự nhiên: vận động, nghe nhạc, đọc sách hoặc giao tiếp thật. Đây là bước đầu của dopamine detox có kiểm soát, giúp khôi phục khả năng tập trung và sự tự chủ.</p>
             `)}
         </div>
