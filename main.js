@@ -48,9 +48,9 @@ const allBadges = [
     { id: 'first_activity', name: 'Hoạt động đầu tiên', description: 'Hoàn thành hoạt động lành mạnh đầu tiên', icon: '🌱' },
     { id: 'all_activities', name: 'Toàn năng', description: 'Hoàn thành tất cả hoạt động lành mạnh trong một ngày', icon: '🌟' },
     { id: 'quiz_pro', name: 'Chuyên gia sức khỏe', description: 'Hoàn thành bài kiểm tra sức khỏe', icon: '🧠' },
-    { id: 'dependency_low_50', name: 'Tự chủ số', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 50%', icon: '⚖️' },
-    { id: 'dependency_low_40', name: 'Giải phóng', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 40%', icon: '🕊️' },
-    { id: 'dependency_low_30', name: 'Chủ nhân cuộc sống', description: 'Đạt điểm phụ thuộc mạng xã hội dưới 30%', icon: '🔮' },
+    { id: 'dependency_low_50', name: 'Tự chủ số', description: 'Đạt điểm sức khỏe kỹ thuật số trên 50%', icon: '⚖️' },
+    { id: 'dependency_low_40', name: 'Giải phóng', description: 'Đạt điểm sức khỏe kỹ thuật số trên 60%', icon: '🕊️' },
+    { id: 'dependency_low_30', name: 'Chủ nhân cuộc sống', description: 'Đạt điểm sức khỏe kỹ thuật số trên 70%', icon: '🔮' },
     { id: 'learning_streak_5', name: 'Chuỗi học tập 5', description: 'Hoàn thành hoạt động học tập 5 ngày liên tiếp', icon: '📖' },
     { id: 'learning_streak_10', name: 'Chuỗi học tập 10', description: 'Hoàn thành hoạt động học tập 10 ngày liên tiếp', icon: '🎓' },
     { id: 'reading_streak_5', name: 'Chuỗi đọc sách 5', description: 'Hoàn thành hoạt động đọc sách 5 ngày liên tiếp', icon: '📕' },
@@ -60,27 +60,28 @@ const allBadges = [
     { id: 'custom_activity', name: 'Sáng tạo', description: 'Thêm một hoạt động lành mạnh của riêng bạn', icon: '🎨' },
 ];
 
+// THAY ĐỔI 1: Đảo ngược thang điểm trong câu hỏi khảo sát
 const quizQuestions = {
     physical: [
-        { q: "Bạn có thường xuyên cảm thấy đau đầu, mỏi mắt, hoặc đau cổ, vai, gáy không?", score: [1, 2, 3, 4, 5] },
-        { q: "Giấc ngủ của bạn có bị gián đoạn hoặc khó ngủ do sử dụng thiết bị điện tử không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có thường xuyên cảm thấy cơ thể mệt mỏi, uể oải ngay cả khi không làm việc nặng nhọc không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có cảm thấy khó khăn khi rời khỏi màn hình để tham gia các hoạt động thể chất không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có thường xuyên có những bữa ăn qua loa để tiếp tục lướt mạng không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có thường xuyên cảm thấy đau đầu, mỏi mắt, hoặc đau cổ, vai, gáy không?", score: [5, 4, 3, 2, 1] },
+        { q: "Giấc ngủ của bạn có bị gián đoạn hoặc khó ngủ do sử dụng thiết bị điện tử không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có thường xuyên cảm thấy cơ thể mệt mỏi, uể oải ngay cả khi không làm việc nặng nhọc không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có cảm thấy khó khăn khi rời khỏi màn hình để tham gia các hoạt động thể chất không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có thường xuyên có những bữa ăn qua loa để tiếp tục lướt mạng không?", score: [5, 4, 3, 2, 1] },
     ],
     mental: [
-        { q: "Bạn có thường xuyên cảm thấy lo lắng, căng thẳng hoặc dễ cáu gắt không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có cảm thấy áp lực phải thể hiện một hình ảnh hoàn hảo trên mạng không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có cảm thấy buồn bã hoặc trống rỗng khi không được lướt mạng không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có cảm thấy lo sợ mình sẽ bỏ lỡ các xu hướng, tin tức trên mạng xã hội không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có thấy mình dễ dàng so sánh bản thân với người khác trên mạng xã hội không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có thường xuyên cảm thấy lo lắng, căng thẳng hoặc dễ cáu gắt không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có cảm thấy áp lực phải thể hiện một hình ảnh hoàn hảo trên mạng không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có cảm thấy buồn bã hoặc trống rỗng khi không được lướt mạng không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có cảm thấy lo sợ mình sẽ bỏ lỡ các xu hướng, tin tức trên mạng xã hội không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có thấy mình dễ dàng so sánh bản thân với người khác trên mạng xã hội không?", score: [5, 4, 3, 2, 1] },
     ],
     concentration: [
-        { q: "Bạn có dễ bị xao nhãng bởi điện thoại khi đang làm việc/học tập không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có kiểm tra điện thoại ngay khi nhận được thông báo không?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có cảm thấy khó khăn khi phải tập trung vào một cuộc trò chuyện trực tiếp?", score: [1, 2, 3, 4, 5] },
-        { q: "Bạn có thể hoàn thành một nhiệm vụ mà không bị gián đoạn không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có thể đọc một cuốn sách mà không cần phải cầm điện thoại không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có dễ bị xao nhãng bởi điện thoại khi đang làm việc/học tập không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có kiểm tra điện thoại ngay khi nhận được thông báo không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có cảm thấy khó khăn khi phải tập trung vào một cuộc trò chuyện trực tiếp?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có thể hoàn thành một nhiệm vụ mà không bị gián đoạn không?", score: [1, 2, 3, 4, 5] }, // Câu này cần được giữ nguyên logic
+        { q: "Bạn có thể đọc một cuốn sách mà không cần phải cầm điện thoại không?", score: [1, 2, 3, 4, 5] }, // Câu này cần được giữ nguyên logic
     ],
 };
 
@@ -473,42 +474,81 @@ function awardBadge(badgeId) {
     }
 }
 
+// THAY ĐỔI 2: Cập nhật toàn bộ hàm đánh giá với logic mới
 // Get quiz result evaluation
 function getQuizResultEvaluation(scores) {
     const { physical, mental, concentration } = scores;
-    const dependencyScore = ((physical * 0.4) + (mental * 0.4) + (concentration * 0.2)) / 5;
-    const dependencyPercentage = (dependencyScore / 5) * 100;
-    const formattedPercentage = dependencyPercentage.toFixed(2);
+    
+    // Tính điểm sức khỏe kỹ thuật số (điểm tốt)
+    const wellnessScore = ((physical * 0.4) + (mental * 0.4) + (concentration * 0.2)) / 5;
+    const wellnessPercentage = (wellnessScore / 5) * 100;
+    
+    // Tính điểm phụ thuộc cuối cùng để hiển thị (điểm xấu)
+    const finalDependencyPercentage = 100 - wellnessPercentage;
+    
+    const formattedDependencyPercentage = finalDependencyPercentage.toFixed(2);
    
     let evaluationDetails = `
-        <p><strong>Điểm phụ thuộc mạng xã hội của bạn là <span class="text-indigo-600 font-bold">${formattedPercentage}%</span>.</strong> Để hiểu rõ hơn về con số này, chúng ta hãy cùng phân tích chi tiết kết quả của bạn ở từng khía cạnh.</p>
+        <p><strong>Điểm phụ thuộc mạng xã hội của bạn là <span class="text-indigo-600 font-bold">${formattedDependencyPercentage}%</span>.</strong> Để hiểu rõ hơn về con số này, chúng ta hãy cùng phân tích chi tiết kết quả của bạn ở từng khía cạnh.</p>
         <div class="p-4 bg-white rounded-lg shadow-inner">
-            <h5 class="font-bold text-lg mb-2">1. Phân tích chi tiết từng khía cạnh</h5>
-            <p class="mb-1"><strong>Sức khỏe thể chất:</strong> (Điểm: ${physical}/25) - ${physical >= 15 ? 'Đang ở mức tốt.' : (physical >= 10 ? 'Cần cải thiện.' : 'Đang có vấn đề.')}</p>
-            <p class="text-sm pl-4 mb-2">${physical >= 15 ? 'Bạn đang duy trì một sức khỏe tốt, các dấu hiệu như đau đầu, mỏi mắt, hay mệt mỏi thể chất do sử dụng thiết bị điện tử dường như không phải là vấn đề lớn. Điều này cho thấy bạn đã biết cách cân bằng giữa màn hình và các hoạt động thể chất.' : (physical >= 10 ? 'Sức khỏe thể chất của bạn đang ở mức trung bình. Có thể bạn đã bắt đầu cảm thấy mỏi mắt, đau cổ hoặc giấc ngủ bị ảnh hưởng. Hãy chú ý hơn đến các dấu hiệu này, chúng là lời cảnh báo từ cơ thể bạn. Hãy thử các bài tập giãn cơ, nhìn ra xa sau mỗi 20 phút sử dụng điện thoại và đảm bảo ngủ đủ giấc.' : 'Điểm số của bạn cho thấy sức khỏe thể chất đang bị ảnh hưởng nghiêm trọng. Các vấn đề về thị lực, giấc ngủ và thể lực có thể là hậu quả trực tiếp của việc sử dụng mạng xã hội quá nhiều. Đây là lúc bạn cần ưu tiên việc chăm sóc bản thân, đảm bảo bạn có đủ giấc ngủ và dành thời gian cho các hoạt động thể chất để phục hồi năng lượng.')}</p>
+            <h5 class="font-bold text-lg mb-2">⚙️ Phần 2: Phân tích chi tiết từng khía cạnh</h5>
+            
+            <h6 class="font-semibold text-md mb-2">2.1. Sức khỏe Thể chất (Physical)</h6>
+            ${physical >= 15 ? `
+            <p class="mb-1">🟢 <strong>Mức độ: Đang ở mức tốt</strong> (Điểm: ${physical}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Bạn đang duy trì được một nền tảng thể chất ổn định. Các biểu hiện tiêu cực như đau đầu, mỏi mắt hay rối loạn giấc ngủ do sử dụng thiết bị điện tử dường như không đáng kể. Điều này chứng tỏ bạn đã hình thành thói quen cân bằng giữa thời gian trước màn hình và hoạt động thể chất, giúp cơ thể có thời gian phục hồi năng lượng.<br>Đây là minh chứng cho sự tự điều chỉnh hành vi sử dụng công nghệ – một yếu tố quan trọng trong việc giảm thiểu ảnh hưởng của “dopamine loop” (vòng lặp dopamine) từ các nền tảng mạng xã hội.</p>
+            ` : (physical >= 10 ? `
+            <p class="mb-1">🟡 <strong>Mức độ: Cần cải thiện</strong> (Điểm: ${physical}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Sức khỏe thể chất của bạn đang có dấu hiệu giảm nhẹ do tác động từ việc sử dụng mạng xã hội. Các triệu chứng như mỏi mắt, căng cổ, hoặc rối loạn giấc ngủ có thể đang xuất hiện nhưng chưa nghiêm trọng. Cơ thể bạn đang gửi tín hiệu cảnh báo về sự quá tải cảm giác.<br>Hãy thiết lập “chu kỳ nghỉ kỹ thuật số” – cứ sau mỗi 20 phút sử dụng, hãy nhìn xa 20 giây (quy tắc 20-20-20), giãn cơ cổ, và hạn chế ánh sáng xanh vào ban đêm. Việc này giúp hệ thần kinh thị giác và cơ xương được tái tạo nhịp sinh học tự nhiên.</p>
+            ` : `
+            <p class="mb-1">🔴 <strong>Mức độ: Đang có vấn đề</strong> (Điểm: ${physical}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Điểm số thấp cho thấy sức khỏe thể chất của bạn đang bị tổn hại rõ rệt. Tình trạng mệt mỏi, giảm thị lực, đau cơ hoặc mất ngủ có thể là hệ quả của việc tiếp xúc liên tục với kích thích số mà không có giai đoạn phục hồi.<br>Khi cơ thể rơi vào trạng thái này, não bộ sẽ tiết dopamine liên tục để duy trì cảm giác “hoạt động”, dẫn đến mệt mỏi mãn tính và suy giảm thể lực. Đây là thời điểm bạn cần thiết lập giới hạn công nghệ cá nhân: giảm thời gian dùng mạng, tăng vận động thể chất và ưu tiên giấc ngủ chất lượng để khôi phục trạng thái cân bằng sinh học.</p>
+            `)}
 
-            <p class="mb-1"><strong>Sức khỏe tinh thần:</strong> (Điểm: ${mental}/25) - ${mental >= 15 ? 'Rất ổn định.' : (mental >= 10 ? 'Cần được quan tâm.' : 'Đang bị ảnh hưởng nghiêm trọng.')}</p>
-            <p class="text-sm pl-4 mb-2">${mental >= 15 ? 'Bạn có một tinh thần vững vàng. Bạn không quá lo lắng về việc bỏ lỡ các xu hướng và ít bị ảnh hưởng bởi những hình ảnh hào nhoáng trên mạng. Điều này là một tài sản quý giá, giúp bạn sống trọn vẹn với hiện tại.' : (mental >= 10 ? 'Sức khỏe tinh thần của bạn đang ở mức cần được quan tâm. Có thể bạn đang cảm thấy áp lực phải thể hiện bản thân hoặc cảm giác trống rỗng khi không có mạng xã hội. Hãy thử viết nhật ký, trò chuyện với bạn bè hoặc tìm một sở thích mới để nuôi dưỡng cảm xúc tích cực.' : 'Điểm số thấp cho thấy bạn đang phải đối mặt với những vấn đề nghiêm trọng như lo lắng, cảm giác trống rỗng hoặc sợ bị bỏ lỡ. Mạng xã hội có thể là nguyên nhân chính dẫn đến những cảm xúc tiêu cực này. Việc so sánh bản thân với người khác có thể làm giảm lòng tự trọng. Đây là lúc bạn cần tìm kiếm sự giúp đỡ từ bạn bè, gia đình hoặc một chuyên gia tâm lý.')}</p>
+            <h6 class="font-semibold text-md mb-2 mt-4">2.2. Sức khỏe Tinh thần (Mental)</h6>
+            ${mental >= 15 ? `
+            <p class="mb-1">🟢 <strong>Mức độ: Rất ổn định</strong> (Điểm: ${mental}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Bạn đang sở hữu một trạng thái tâm lý vững vàng. Bạn ít bị chi phối bởi hiệu ứng “so sánh xã hội” (social comparison effect) và không quá lo lắng khi không cập nhật xu hướng mới. Điều này cho thấy bạn đã xây dựng được hàng rào nhận thức vững chắc trước các kích thích cảm xúc từ mạng xã hội – yếu tố nền tảng giúp duy trì cảm xúc tích cực và lòng tự trọng ổn định.<br>Đây là dấu hiệu của sức khỏe tinh thần kỹ thuật số (digital mental wellness), giúp bạn sử dụng công nghệ như công cụ phục vụ cuộc sống, chứ không phải để xác định giá trị bản thân.</p>
+            ` : (mental >= 10 ? `
+            <p class="mb-1">🟡 <strong>Mức độ: Cần được quan tâm</strong> (Điểm: ${mental}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Sức khỏe tinh thần của bạn đang ở mức dễ bị dao động. Việc lo lắng khi bị “bỏ lỡ” (FOMO) hoặc cảm thấy áp lực khi phải thể hiện bản thân trên mạng cho thấy dopamine từ các tương tác ảo đang ảnh hưởng đến vùng cảm xúc của não bộ.<br>Bạn nên dành thời gian tách khỏi môi trường mạng, viết nhật ký cảm xúc, hoặc tham gia các hoạt động mang tính kết nối thật như trò chuyện, đọc sách, hoặc học kỹ năng mới. Những hoạt động này giúp tái cân bằng hệ dopamine và củng cố cảm xúc tự nhiên thay vì phụ thuộc vào phản hồi ảo.</p>
+            ` : `
+            <p class="mb-1">🔴 <strong>Mức độ: Đang bị ảnh hưởng nghiêm trọng</strong> (Điểm: ${mental}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Điểm số này cho thấy bạn đang trải qua mức độ căng thẳng hoặc lo âu cao liên quan đến việc sử dụng mạng xã hội. Cảm giác trống rỗng, mất tập trung, hoặc sợ bị lãng quên là dấu hiệu của dopamine burnout – khi não đã quen với việc được kích thích liên tục.<br>Lúc này, điều cần thiết là can thiệp cảm xúc tích cực: hạn chế tiếp xúc nội dung tiêu cực, nói chuyện với người thân hoặc tìm đến chuyên gia tâm lý để được hướng dẫn cách tái tạo năng lượng tinh thần và thoát khỏi sự phụ thuộc cảm xúc vào môi trường ảo.</p>
+            `)}
 
-            <p class="mb-1"><strong>Mức độ tập trung:</strong> (Điểm: ${concentration}/25) - ${concentration >= 15 ? 'Rất tốt.' : (concentration >= 10 ? 'Cần rèn luyện thêm.' : 'Đang rất thấp.')}</p>
-            <p class="text-sm pl-4 mb-2">${concentration >= 15 ? 'Bạn có khả năng tập trung tốt. Điều này giúp bạn học tập, làm việc hiệu quả và tận hưởng trọn vẹn các cuộc trò chuyện. Hãy tiếp tục duy trì thói quen tốt này.' : (concentration >= 10 ? 'Khả năng tập trung của bạn đang ở mức trung bình. Bạn dễ bị phân tâm bởi các thông báo và có thể khó khăn khi làm việc mà không kiểm tra điện thoại. Hãy thử các phương pháp như Pomodoro để dần dần cải thiện sự tập trung của mình.' : 'Mức độ tập trung của bạn đang ở mức báo động. Việc dễ dàng bị xao nhãng có thể là dấu hiệu rõ ràng nhất của sự phụ thuộc vào mạng xã hội. Điều này ảnh hưởng trực tiếp đến hiệu quả công việc và học tập. Hãy thử bắt đầu với những khoảng thời gian ngắn không sử dụng điện thoại và tăng dần lên.')}</p>
+            <h6 class="font-semibold text-md mb-2 mt-4">2.3. Mức độ Tập trung (Concentration)</h6>
+            ${concentration >= 15 ? `
+            <p class="mb-1">🟢 <strong>Mức độ: Rất tốt</strong> (Điểm: ${concentration}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Bạn có khả năng duy trì sự tập trung bền vững, phản ánh việc não bộ hoạt động ở trạng thái kiểm soát chứ không bị cuốn vào dòng chảy thông tin liên tục. Đây là một dấu hiệu đáng quý trong thời đại kỹ thuật số, cho thấy bạn đang sử dụng dopamine một cách có ý thức – chỉ kích hoạt khi cần thiết cho học tập và công việc.<br>Hãy tiếp tục phát huy bằng cách duy trì khoảng thời gian “deep work” (làm việc sâu), nơi bạn loại bỏ hoàn toàn thông báo và tập trung tuyệt đối vào một nhiệm vụ.</p>
+            ` : (concentration >= 10 ? `
+            <p class="mb-1">🟡 <strong>Mức độ: Cần rèn luyện thêm</strong> (Điểm: ${concentration}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Bạn có khả năng tập trung ở mức chấp nhận được, nhưng vẫn dễ bị gián đoạn bởi các tín hiệu số như thông báo, tin nhắn hoặc video ngắn. Điều này là biểu hiện của não bộ đang bị tái huấn luyện sai cách – thường xuyên chuyển đổi nhiệm vụ, khiến khả năng duy trì sự chú ý giảm.<br>Hãy thử phương pháp Pomodoro (làm việc 25 phút, nghỉ 5 phút), đồng thời tắt toàn bộ thông báo không cần thiết để não bộ tái lập khả năng tập trung tự nhiên.</p>
+            ` : `
+            <p class="mb-1">🔴 <strong>Mức độ: Đang rất thấp</strong> (Điểm: ${concentration}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Điểm thấp cho thấy khả năng kiểm soát chú ý đang bị rối loạn nghiêm trọng, thường đi kèm với việc liên tục chuyển đổi giữa các ứng dụng và nội dung. Đây là dấu hiệu của digital distraction syndrome – hội chứng phân tán chú ý do sử dụng mạng xã hội quá mức.<br>Hãy bắt đầu bằng việc thiết lập vùng không công nghệ (no-screen zone) trong ngày, ví dụ như 30 phút sau khi thức dậy hoặc trước khi đi ngủ. Khi não bộ dần quen với “khoảng lặng thông tin”, mức dopamine sẽ ổn định và khả năng tập trung sẽ được phục hồi.</p>
+            `)}
         </div>
-       
+        
         <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
-            <h5 class="font-bold text-lg mb-2">2. Tại sao điểm số tốt ở các phần riêng lại có thể dẫn đến kết quả phụ thuộc cao?</h5>
-            <p>Điều này nghe có vẻ mâu thuẫn, nhưng trên thực tế, nó rất phổ biến. Kết quả tổng thể không chỉ dựa trên việc bạn có bị ảnh hưởng tiêu cực hay không, mà còn về mức độ <strong>phụ thuộc vào hành vi</strong>. Một người có thể có sức khỏe thể chất và tinh thần khá tốt, nhưng nếu họ vẫn dành <strong>phần lớn thời gian trong ngày</strong> để lướt mạng xã hội một cách vô thức, thì mức độ phụ thuộc vẫn sẽ ở mức cao. Điều này giống như việc bạn có một chiếc xe với động cơ tốt, lốp xe ổn định, nhưng lại mất kiểm soát vô lăng — chiếc xe vẫn có thể đi được, nhưng nó không đi đúng hướng và có thể gặp nguy hiểm bất cứ lúc nào.</p>
-            <p class="mt-2">Mạng xã hội được thiết kế để gây nghiện, khiến chúng ta quay lại liên tục. Do đó, ngay cả khi bạn không cảm thấy căng thẳng hay mỏi mắt, hành vi lướt mạng vô thức, không có mục đích rõ ràng, cũng đã là một dạng phụ thuộc. Mục tiêu cuối cùng của ứng dụng này không chỉ là giúp bạn tránh những tác hại trực tiếp, mà còn là giúp bạn lấy lại quyền kiểm soát thời gian và sự tập trung của mình.</p>
-        </div>
-       
-        <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
-            <h5 class="font-bold text-lg mb-2">3. Lời khuyên tổng thể</h5>
-            <p>${formattedPercentage >= 60 ? 'Mức độ phụ thuộc mạng xã hội của bạn khá cao. Mặc dù một số lĩnh vực có thể tốt, nhưng tổng thể cho thấy mạng xã hội đang chiếm phần lớn trong cuộc sống của bạn. Hãy bắt đầu bằng việc giảm thời gian sử dụng 10% mỗi tuần và tập trung vào các hoạt động ngoại tuyến.' : (formattedPercentage >= 40 ? 'Mức độ phụ thuộc của bạn ở mức trung bình. Bạn đã nhận ra tầm quan trọng của việc cân bằng. Hãy tiếp tục giảm dần thời gian sử dụng và khám phá thêm các hoạt động lành mạnh để cải thiện điểm số.' : 'Mức độ phụ thuộc của bạn rất thấp. Bạn đã có một lối sống cân bằng và lành mạnh. Hãy tiếp tục phát huy để luôn là người làm chủ cuộc sống số của mình!')}</p>
+            <h5 class="font-bold text-lg mb-2">Phần 4: Lời khuyên Tổng thể</h5>
+            ${finalDependencyPercentage <= 30 ? `
+            <p class="mb-1">🟢 <strong>Mức độ: Sức khỏe kỹ thuật số tốt</strong></p>
+            <p class="text-sm pl-4 text-gray-600">Bạn đang làm rất tốt. Điểm số cao thể hiện bạn đã đạt đến trạng thái tự chủ kỹ thuật số – sử dụng công nghệ như công cụ hỗ trợ, không phải nguồn dopamine chính.<br>Hãy duy trì thói quen lành mạnh này bằng cách thường xuyên “detox thông tin”: tạm rời xa mạng xã hội 1 ngày mỗi tuần, dành thời gian cho thiên nhiên, sáng tạo, và tương tác thật. Đây là cách tốt nhất để duy trì sự tự do tinh thần trong kỷ nguyên số.</p>
+            ` : (finalDependencyPercentage <= 60 ? `
+            <p class="mb-1">🟡 <strong>Mức độ: Sức khỏe kỹ thuật số trung bình</strong></p>
+            <p class="text-sm pl-4 text-gray-600">Bạn đang ở giai đoạn chuyển tiếp giữa thói quen và nhận thức. Mức độ phụ thuộc ở mức vừa phải, cho thấy bạn đã bắt đầu kiểm soát được thói quen, nhưng đôi khi vẫn để mạng xã hội ảnh hưởng cảm xúc.<br>Hãy xây dựng lịch sử dụng mạng có mục đích: chỉ truy cập khi cần, giới hạn thời gian, và ưu tiên hoạt động ngoại tuyến. Việc này giúp não bộ tái học cách tìm niềm vui từ thế giới thật.</p>
+            ` : `
+            <p class="mb-1">🔴 <strong>Mức độ: Cần cải thiện sức khỏe kỹ thuật số</strong></p>
+            <p class="text-sm pl-4 text-gray-600">Điểm số cho thấy mạng xã hội đang chi phối đáng kể hành vi và cảm xúc của bạn. Dù bạn có thể vẫn duy trì sức khỏe tốt, nhưng não bộ đã quen với việc tìm kiếm kích thích tức thời.<br>Hãy bắt đầu bằng việc giảm 10% thời gian sử dụng mỗi tuần, thay thế bằng các hoạt động mang lại dopamine tự nhiên: vận động, nghe nhạc, đọc sách hoặc giao tiếp thật. Đây là bước đầu của dopamine detox có kiểm soát, giúp khôi phục khả năng tập trung và sự tự chủ.</p>
+            `)}
         </div>
     `;
    
+    // TRẢ VỀ CẢ HAI GIÁ TRỊ ĐỂ SỬ DỤNG CHO MỤC ĐÍCH KHÁC NHAU
     return {
         evaluationDetails,
-        dependencyPercentage,
+        wellnessPercentage, // Dùng để trao huy hiệu
         finalAdvice: ''
     };
 }
@@ -786,10 +826,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('submit-quiz-btn').classList.add('hidden');
             awardBadge('quiz_pro');
            
-            const dependencyPercentage = ((scores.physical * 0.4) + (scores.mental * 0.4) + (scores.concentration * 0.2)) / 5 * 20;
-            if (dependencyPercentage < 50) awardBadge('dependency_low_50');
-            if (dependencyPercentage < 40) awardBadge('dependency_low_40');
-            if (dependencyPercentage < 30) awardBadge('dependency_low_30');
+            // THAY ĐỔI 3: Cập nhật logic trao huy hiệu cho thang điểm mới
+            const wellnessPercentage = evaluation.wellnessPercentage;
+            if (wellnessPercentage > 50) awardBadge('dependency_low_50');
+            if (wellnessPercentage > 60) awardBadge('dependency_low_40');
+            if (wellnessPercentage > 70) awardBadge('dependency_low_30');
 
             if (window.quizChart) window.quizChart.destroy();
             window.quizChart = new Chart(document.getElementById('quiz-chart').getContext('2d'), {
