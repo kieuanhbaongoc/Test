@@ -63,25 +63,25 @@ const allBadges = [
 // THAY ĐỔI 1: Đảo ngược thang điểm trong câu hỏi khảo sát
 const quizQuestions = {
     physical: [
-        { q: "Bạn có thường xuyên cảm thấy đau đầu, mỏi mắt, hoặc đau cổ, vai, gáy không?", score: [5, 4, 3, 2, 1] },
-        { q: "Giấc ngủ của bạn có bị gián đoạn hoặc khó ngủ do sử dụng thiết bị điện tử không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có thường xuyên cảm thấy cơ thể mệt mỏi, uể oải ngay cả khi không làm việc nặng nhọc không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có cảm thấy khó khăn khi rời khỏi màn hình để tham gia các hoạt động thể chất không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có thường xuyên có những bữa ăn qua loa để tiếp tục lướt mạng không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có thường xuyên cảm thấy đau đầu, mỏi mắt, hoặc đau cổ, vai, gáy không?", score: [1, 2, 3, 4, 5] },
+        { q: "Giấc ngủ của bạn có bị gián đoạn hoặc khó ngủ do sử dụng thiết bị điện tử không?", score: [1, 2, 3, 4, 5]},
+        { q: "Bạn có thường xuyên cảm thấy cơ thể mệt mỏi, uể oải ngay cả khi không làm việc nặng nhọc không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có cảm thấy khó khăn khi rời khỏi màn hình để tham gia các hoạt động thể chất không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có thường xuyên có những bữa ăn qua loa để tiếp tục lướt mạng không?", score: [1, 2, 3, 4, 5] },
     ],
     mental: [
-        { q: "Bạn có thường xuyên cảm thấy lo lắng, căng thẳng hoặc dễ cáu gắt không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có cảm thấy áp lực phải thể hiện một hình ảnh hoàn hảo trên mạng không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có cảm thấy buồn bã hoặc trống rỗng khi không được lướt mạng không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có cảm thấy lo sợ mình sẽ bỏ lỡ các xu hướng, tin tức trên mạng xã hội không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có thấy mình dễ dàng so sánh bản thân với người khác trên mạng xã hội không?", score: [5, 4, 3, 2, 1] },
+        { q: "Bạn có thường xuyên cảm thấy lo lắng, căng thẳng hoặc dễ cáu gắt không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có cảm thấy áp lực phải thể hiện một hình ảnh hoàn hảo trên mạng không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có cảm thấy buồn bã hoặc trống rỗng khi không được lướt mạng không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có cảm thấy lo sợ mình sẽ bỏ lỡ các xu hướng, tin tức trên mạng xã hội không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có thấy mình dễ dàng so sánh bản thân với người khác trên mạng xã hội không?", score: [1, 2, 3, 4, 5] },
     ],
     concentration: [
-        { q: "Bạn có dễ bị xao nhãng bởi điện thoại khi đang làm việc/học tập không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có kiểm tra điện thoại ngay khi nhận được thông báo không?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có cảm thấy khó khăn khi phải tập trung vào một cuộc trò chuyện trực tiếp?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có thường bị gián đoạn khi đang thực hiện một nhiệm vụ không?", score: [5, 4, 3, 2, 1] },
-        { q: "“Bạn có thói quen sử dụng điện thoại khi đang đọc sách không?", score: [5, 4, 3, 2, 1] }, 
+        { q: "Bạn có dễ bị xao nhãng bởi điện thoại khi đang làm việc/học tập không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có kiểm tra điện thoại ngay khi nhận được thông báo không?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có cảm thấy khó khăn khi phải tập trung vào một cuộc trò chuyện trực tiếp?", score: [1, 2, 3, 4, 5] },
+        { q: "Bạn có thường bị gián đoạn khi đang thực hiện một nhiệm vụ không?", score: [1, 2, 3, 4, 5] },
+        { q: "“Bạn có thói quen sử dụng điện thoại khi đang đọc sách không?", score: [1, 2, 3, 4, 5] }, 
     ],
 };
 
@@ -482,11 +482,10 @@ function getQuizResultEvaluation(scores) {
     
     // Tính điểm sức khỏe kỹ thuật số (điểm tốt)
    // Bằng code mới (đơn giản và đúng đắn)
+// Tính điểm phụ thuộc cuối cùng để hiển thị
 const totalScore = physical + mental + concentration;
-const wellnessPercentage = (totalScore / 75) * 100;
-const finalDependencyPercentage = 100 - wellnessPercentage;
-    
-    const formattedDependencyPercentage = finalDependencyPercentage.toFixed(2);
+const finalDependencyPercentage = (totalScore / 75) * 100;
+const formattedDependencyPercentage = finalDependencyPercentage.toFixed(2);;
    
     let evaluationDetails = `
         <p><strong>Điểm phụ thuộc mạng xã hội của bạn là <span class="text-indigo-600 font-bold">${formattedDependencyPercentage}%</span>.</strong> Để hiểu rõ hơn về con số này, chúng ta hãy cùng phân tích chi tiết kết quả của bạn ở từng khía cạnh.</p>
