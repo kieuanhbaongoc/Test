@@ -80,8 +80,8 @@ const quizQuestions = {
         { q: "Bạn có dễ bị xao nhãng bởi điện thoại khi đang làm việc/học tập không?", score: [5, 4, 3, 2, 1] },
         { q: "Bạn có kiểm tra điện thoại ngay khi nhận được thông báo không?", score: [5, 4, 3, 2, 1] },
         { q: "Bạn có cảm thấy khó khăn khi phải tập trung vào một cuộc trò chuyện trực tiếp?", score: [5, 4, 3, 2, 1] },
-        { q: "Bạn có thể hoàn thành một nhiệm vụ mà không bị gián đoạn không?", score: [1, 2, 3, 4, 5] }, // Câu này cần được giữ nguyên logic
-        { q: "Bạn có thể đọc một cuốn sách mà không cần phải cầm điện thoại không?", score: [1, 2, 3, 4, 5] }, // Câu này cần được giữ nguyên logic
+        { q: "Bạn có thường bị gián đoạn khi đang thực hiện một nhiệm vụ không?", score: [5, 4, 3, 2, 1] },
+        { q: "“Bạn có thói quen sử dụng điện thoại khi đang đọc sách không?", score: [5, 4, 3, 2, 1] }, 
     ],
 };
 
@@ -476,79 +476,78 @@ function awardBadge(badgeId) {
 
 // THAY ĐỔI 2: Cập nhật toàn bộ hàm đánh giá với logic mới
 // Get quiz result evaluation
+// Get quiz result evaluation
 function getQuizResultEvaluation(scores) {
     const { physical, mental, concentration } = scores;
     
     // Tính điểm sức khỏe kỹ thuật số (điểm tốt)
-    const wellnessScore = ((physical * 0.4) + (mental * 0.4) + (concentration * 0.2)) / 5;
-    const wellnessPercentage = (wellnessScore / 5) * 100;
-    
-    // Tính điểm phụ thuộc cuối cùng để hiển thị (điểm xấu)
-    const finalDependencyPercentage = 100 - wellnessPercentage;
+   // Bằng code mới (đơn giản và đúng đắn)
+const totalScore = physical + mental + concentration;
+const wellnessPercentage = (totalScore / 75) * 100;
+const finalDependencyPercentage = 100 - wellnessPercentage;
     
     const formattedDependencyPercentage = finalDependencyPercentage.toFixed(2);
    
     let evaluationDetails = `
         <p><strong>Điểm phụ thuộc mạng xã hội của bạn là <span class="text-indigo-600 font-bold">${formattedDependencyPercentage}%</span>.</strong> Để hiểu rõ hơn về con số này, chúng ta hãy cùng phân tích chi tiết kết quả của bạn ở từng khía cạnh.</p>
         <div class="p-4 bg-white rounded-lg shadow-inner">
-            <h5 class="font-bold text-lg mb-2"> Phần 1: Phân tích chi tiết từng khía cạnh</h5>
+            <h5 class="font-bold text-lg mb-2">⚙️ Phần 2: Phân tích chi tiết từng khía cạnh</h5>
             
-            <h6 class="font-semibold text-md mb-2">Sức khỏe Thể chất (Physical)</h6>
-            ${physical >= 15 ? `
+            <h6 class="font-semibold text-md mb-2">2.1. Sức khỏe Thể chất (Physical)</h6>
+            ${physical >= 18 ? `
             <p class="mb-1">🟢 <strong>Mức độ: Đang ở mức tốt</strong> (Điểm: ${physical}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Bạn đang duy trì được một nền tảng thể chất ổn định. Các biểu hiện tiêu cực như đau đầu, mỏi mắt hay rối loạn giấc ngủ do sử dụng thiết bị điện tử dường như không đáng kể. Điều này chứng tỏ bạn đã hình thành thói quen cân bằng giữa thời gian trước màn hình và hoạt động thể chất, giúp cơ thể có thời gian phục hồi năng lượng.<br>Đây là minh chứng cho sự tự điều chỉnh hành vi sử dụng công nghệ – một yếu tố quan trọng trong việc giảm thiểu ảnh hưởng của “dopamine loop” (vòng lặp dopamine) từ các nền tảng mạng xã hội.</p>
-            ` : (physical >= 10 ? `
-            <p class="mb-1">🟡 <strong>Mức độ: Cần cải thiện</strong> (Điểm: ${physical}/25)</p>
-            <p class="text-sm pl-4 mb-2 text-gray-600">Sức khỏe thể chất của bạn đang có dấu hiệu giảm nhẹ do tác động từ việc sử dụng mạng xã hội. Các triệu chứng như mỏi mắt, căng cổ, hoặc rối loạn giấc ngủ có thể đang xuất hiện nhưng chưa nghiêm trọng. Cơ thể bạn đang gửi tín hiệu cảnh báo về sự quá tải cảm giác.<br>Hãy thiết lập “chu kỳ nghỉ kỹ thuật số” – cứ sau mỗi 20 phút sử dụng, hãy nhìn xa 20 giây (quy tắc 20-20-20), giãn cơ cổ, và hạn chế ánh sáng xanh vào ban đêm. Việc này giúp hệ thần kinh thị giác và cơ xương được tái tạo nhịp sinh học tự nhiên.</p>
-            ` : `
+            ` : (physical < 9 ? `
             <p class="mb-1">🔴 <strong>Mức độ: Đang có vấn đề</strong> (Điểm: ${physical}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Điểm số thấp cho thấy sức khỏe thể chất của bạn đang bị tổn hại rõ rệt. Tình trạng mệt mỏi, giảm thị lực, đau cơ hoặc mất ngủ có thể là hệ quả của việc tiếp xúc liên tục với kích thích số mà không có giai đoạn phục hồi.<br>Khi cơ thể rơi vào trạng thái này, não bộ sẽ tiết dopamine liên tục để duy trì cảm giác “hoạt động”, dẫn đến mệt mỏi mãn tính và suy giảm thể lực. Đây là thời điểm bạn cần thiết lập giới hạn công nghệ cá nhân: giảm thời gian dùng mạng, tăng vận động thể chất và ưu tiên giấc ngủ chất lượng để khôi phục trạng thái cân bằng sinh học.</p>
+            ` : `
+            <p class="mb-1">🟡 <strong>Mức độ: Cần cải thiện</strong> (Điểm: ${physical}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Sức khỏe thể chất của bạn đang có dấu hiệu giảm nhẹ do tác động từ việc sử dụng mạng xã hội. Các triệu chứng như mỏi mắt, căng cổ, hoặc rối loạn giấc ngủ có thể đang xuất hiện nhưng chưa nghiêm trọng. Cơ thể bạn đang gửi tín hiệu cảnh báo về sự quá tải cảm giác.<br>Hãy thiết lập “chu kỳ nghỉ kỹ thuật số” – cứ sau mỗi 20 phút sử dụng, hãy nhìn xa 20 giây (quy tắc 20-20-20), giãn cơ cổ, và hạn chế ánh sáng xanh vào ban đêm. Việc này giúp hệ thần kinh thị giác và cơ xương được tái tạo nhịp sinh học tự nhiên.</p>
             `)}
 
-            <h6 class="font-semibold text-md mb-2 mt-4">Sức khỏe Tinh thần (Mental)</h6>
-            ${mental >= 15 ? `
+            <h6 class="font-semibold text-md mb-2 mt-4">2.2. Sức khỏe Tinh thần (Mental)</h6>
+            ${mental >= 18 ? `
             <p class="mb-1">🟢 <strong>Mức độ: Rất ổn định</strong> (Điểm: ${mental}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Bạn đang sở hữu một trạng thái tâm lý vững vàng. Bạn ít bị chi phối bởi hiệu ứng “so sánh xã hội” (social comparison effect) và không quá lo lắng khi không cập nhật xu hướng mới. Điều này cho thấy bạn đã xây dựng được hàng rào nhận thức vững chắc trước các kích thích cảm xúc từ mạng xã hội – yếu tố nền tảng giúp duy trì cảm xúc tích cực và lòng tự trọng ổn định.<br>Đây là dấu hiệu của sức khỏe tinh thần kỹ thuật số (digital mental wellness), giúp bạn sử dụng công nghệ như công cụ phục vụ cuộc sống, chứ không phải để xác định giá trị bản thân.</p>
-            ` : (mental >= 10 ? `
-            <p class="mb-1">🟡 <strong>Mức độ: Cần được quan tâm</strong> (Điểm: ${mental}/25)</p>
-            <p class="text-sm pl-4 mb-2 text-gray-600">Sức khỏe tinh thần của bạn đang ở mức dễ bị dao động. Việc lo lắng khi bị “bỏ lỡ” (FOMO) hoặc cảm thấy áp lực khi phải thể hiện bản thân trên mạng cho thấy dopamine từ các tương tác ảo đang ảnh hưởng đến vùng cảm xúc của não bộ.<br>Bạn nên dành thời gian tách khỏi môi trường mạng, viết nhật ký cảm xúc, hoặc tham gia các hoạt động mang tính kết nối thật như trò chuyện, đọc sách, hoặc học kỹ năng mới. Những hoạt động này giúp tái cân bằng hệ dopamine và củng cố cảm xúc tự nhiên thay vì phụ thuộc vào phản hồi ảo.</p>
-            ` : `
+            ` : (mental < 9 ? `
             <p class="mb-1">🔴 <strong>Mức độ: Đang bị ảnh hưởng nghiêm trọng</strong> (Điểm: ${mental}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Điểm số này cho thấy bạn đang trải qua mức độ căng thẳng hoặc lo âu cao liên quan đến việc sử dụng mạng xã hội. Cảm giác trống rỗng, mất tập trung, hoặc sợ bị lãng quên là dấu hiệu của dopamine burnout – khi não đã quen với việc được kích thích liên tục.<br>Lúc này, điều cần thiết là can thiệp cảm xúc tích cực: hạn chế tiếp xúc nội dung tiêu cực, nói chuyện với người thân hoặc tìm đến chuyên gia tâm lý để được hướng dẫn cách tái tạo năng lượng tinh thần và thoát khỏi sự phụ thuộc cảm xúc vào môi trường ảo.</p>
+            ` : `
+            <p class="mb-1">🟡 <strong>Mức độ: Cần được quan tâm</strong> (Điểm: ${mental}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Sức khỏe tinh thần của bạn đang ở mức dễ bị dao động. Việc lo lắng khi bị “bỏ lỡ” (FOMO) hoặc cảm thấy áp lực khi phải thể hiện bản thân trên mạng cho thấy dopamine từ các tương tác ảo đang ảnh hưởng đến vùng cảm xúc của não bộ.<br>Bạn nên dành thời gian tách khỏi môi trường mạng, viết nhật ký cảm xúc, hoặc tham gia các hoạt động mang tính kết nối thật như trò chuyện, đọc sách, hoặc học kỹ năng mới. Những hoạt động này giúp tái cân bằng hệ dopamine và củng cố cảm xúc tự nhiên thay vì phụ thuộc vào phản hồi ảo.</p>
             `)}
 
-            <h6 class="font-semibold text-md mb-2 mt-4">Mức độ Tập trung (Concentration)</h6>
-            ${concentration >= 15 ? `
+            <h6 class="font-semibold text-md mb-2 mt-4">2.3. Mức độ Tập trung (Concentration)</h6>
+            ${concentration >= 18 ? `
             <p class="mb-1">🟢 <strong>Mức độ: Rất tốt</strong> (Điểm: ${concentration}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Bạn có khả năng duy trì sự tập trung bền vững, phản ánh việc não bộ hoạt động ở trạng thái kiểm soát chứ không bị cuốn vào dòng chảy thông tin liên tục. Đây là một dấu hiệu đáng quý trong thời đại kỹ thuật số, cho thấy bạn đang sử dụng dopamine một cách có ý thức – chỉ kích hoạt khi cần thiết cho học tập và công việc.<br>Hãy tiếp tục phát huy bằng cách duy trì khoảng thời gian “deep work” (làm việc sâu), nơi bạn loại bỏ hoàn toàn thông báo và tập trung tuyệt đối vào một nhiệm vụ.</p>
-            ` : (concentration >= 10 ? `
-            <p class="mb-1">🟡 <strong>Mức độ: Cần rèn luyện thêm</strong> (Điểm: ${concentration}/25)</p>
-            <p class="text-sm pl-4 mb-2 text-gray-600">Bạn có khả năng tập trung ở mức chấp nhận được, nhưng vẫn dễ bị gián đoạn bởi các tín hiệu số như thông báo, tin nhắn hoặc video ngắn. Điều này là biểu hiện của não bộ đang bị tái huấn luyện sai cách – thường xuyên chuyển đổi nhiệm vụ, khiến khả năng duy trì sự chú ý giảm.<br>Hãy thử phương pháp Pomodoro (làm việc 25 phút, nghỉ 5 phút), đồng thời tắt toàn bộ thông báo không cần thiết để não bộ tái lập khả năng tập trung tự nhiên.</p>
-            ` : `
+            ` : (concentration < 9 ? `
             <p class="mb-1">🔴 <strong>Mức độ: Đang rất thấp</strong> (Điểm: ${concentration}/25)</p>
             <p class="text-sm pl-4 mb-2 text-gray-600">Điểm thấp cho thấy khả năng kiểm soát chú ý đang bị rối loạn nghiêm trọng, thường đi kèm với việc liên tục chuyển đổi giữa các ứng dụng và nội dung. Đây là dấu hiệu của digital distraction syndrome – hội chứng phân tán chú ý do sử dụng mạng xã hội quá mức.<br>Hãy bắt đầu bằng việc thiết lập vùng không công nghệ (no-screen zone) trong ngày, ví dụ như 30 phút sau khi thức dậy hoặc trước khi đi ngủ. Khi não bộ dần quen với “khoảng lặng thông tin”, mức dopamine sẽ ổn định và khả năng tập trung sẽ được phục hồi.</p>
+            ` : `
+            <p class="mb-1">🟡 <strong>Mức độ: Cần rèn luyện thêm</strong> (Điểm: ${concentration}/25)</p>
+            <p class="text-sm pl-4 mb-2 text-gray-600">Bạn có khả năng tập trung ở mức chấp nhận được, nhưng vẫn dễ bị gián đoạn bởi các tín hiệu số như thông báo, tin nhắn hoặc video ngắn. Điều này là biểu hiện của não bộ đang bị tái huấn luyện sai cách – thường xuyên chuyển đổi nhiệm vụ, khiến khả năng duy trì sự chú ý giảm.<br>Hãy thử phương pháp Pomodoro (làm việc 25 phút, nghỉ 5 phút), đồng thời tắt toàn bộ thông báo không cần thiết để não bộ tái lập khả năng tập trung tự nhiên.</p>
             `)}
         </div>
         
         <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
-            <h5 class="font-bold text-lg mb-2">Phần 2: Lời khuyên Tổng thể</h5>
+            <h5 class="font-bold text-lg mb-2">Phần 4: Lời khuyên Tổng thể</h5>
             ${finalDependencyPercentage <= 30 ? `
-            <p class="mb-1">🟢 <strong>Mức độ: Phụ thuộc thấp</strong></p>
+            <p class="mb-1">🟢 <strong>Mức độ: Sức khỏe kỹ thuật số tốt</strong></p>
             <p class="text-sm pl-4 text-gray-600">Bạn đang làm rất tốt. Điểm số cao thể hiện bạn đã đạt đến trạng thái tự chủ kỹ thuật số – sử dụng công nghệ như công cụ hỗ trợ, không phải nguồn dopamine chính.<br>Hãy duy trì thói quen lành mạnh này bằng cách thường xuyên “detox thông tin”: tạm rời xa mạng xã hội 1 ngày mỗi tuần, dành thời gian cho thiên nhiên, sáng tạo, và tương tác thật. Đây là cách tốt nhất để duy trì sự tự do tinh thần trong kỷ nguyên số.</p>
             ` : (finalDependencyPercentage <= 60 ? `
-            <p class="mb-1">🟡 <strong>Mức độ: Phụ thuộc trung bình</strong></p>
+            <p class="mb-1">🟡 <strong>Mức độ: Sức khỏe kỹ thuật số trung bình</strong></p>
             <p class="text-sm pl-4 text-gray-600">Bạn đang ở giai đoạn chuyển tiếp giữa thói quen và nhận thức. Mức độ phụ thuộc ở mức vừa phải, cho thấy bạn đã bắt đầu kiểm soát được thói quen, nhưng đôi khi vẫn để mạng xã hội ảnh hưởng cảm xúc.<br>Hãy xây dựng lịch sử dụng mạng có mục đích: chỉ truy cập khi cần, giới hạn thời gian, và ưu tiên hoạt động ngoại tuyến. Việc này giúp não bộ tái học cách tìm niềm vui từ thế giới thật.</p>
             ` : `
-            <p class="mb-1">🔴 <strong>Mức độ: Phụ thuộc cao</strong></p>
+            <p class="mb-1">🔴 <strong>Mức độ: Cần cải thiện sức khỏe kỹ thuật số</strong></p>
             <p class="text-sm pl-4 text-gray-600">Điểm số cho thấy mạng xã hội đang chi phối đáng kể hành vi và cảm xúc của bạn. Dù bạn có thể vẫn duy trì sức khỏe tốt, nhưng não bộ đã quen với việc tìm kiếm kích thích tức thời.<br>Hãy bắt đầu bằng việc giảm 10% thời gian sử dụng mỗi tuần, thay thế bằng các hoạt động mang lại dopamine tự nhiên: vận động, nghe nhạc, đọc sách hoặc giao tiếp thật. Đây là bước đầu của dopamine detox có kiểm soát, giúp khôi phục khả năng tập trung và sự tự chủ.</p>
             `)}
         </div>
     `;
    
-    // TRẢ VỀ CẢ HAI GIÁ TRỊ ĐỂ SỬ DỤNG CHO MỤC ĐÍCH KHÁC NHAU
     return {
         evaluationDetails,
-        wellnessPercentage, // Dùng để trao huy hiệu
+        wellnessPercentage,
         finalAdvice: ''
     };
 }
