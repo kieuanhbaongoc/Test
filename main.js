@@ -11,12 +11,14 @@ let userData = {
     learningStreak: 0,
     readingStreak: 0,
     exerciseStreak: 0,
+    // LỖI ĐÃ ĐƯỢC SỬA Ở DÒNG BÊN DƯỚI
     quizScores: { physical: 0, mental: 0, concentration: 0 },
     quizHistory: [],
     lastLoginDate: null,
     lastActivityDate: null,
     activityHistory: {}
 };
+
 const todayIndex = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
 
 const socialApps = [
