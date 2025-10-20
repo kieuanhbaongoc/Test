@@ -965,7 +965,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.weeklyUsageChart) {
             try {
                 // CẬP NHẬT: Tăng độ phân giải lên 2x
-                const imageBase64 = window.weeklyUsageChart.toBase64Image({ scale: 2 });
+                const imageBase64 = window.weeklyUsageChart.toBase64Image({ scale: 3 });
                 
                 // Tạo một thẻ <a> tạm thời để tải file
                 const link = document.createElement('a');
