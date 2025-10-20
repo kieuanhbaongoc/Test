@@ -964,7 +964,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('save-weekly-chart-btn')?.addEventListener('click', () => {
         if (window.weeklyUsageChart) {
             try {
-                // CẬP NHẬT: Tăng độ phân giải lên 2x
+                // CẬP NHẬT: Tăng độ phân giải lên 33x
                 const imageBase64 = window.weeklyUsageChart.toBase64Image({ scale: 3 });
                 
                 // Tạo một thẻ <a> tạm thời để tải file
@@ -994,8 +994,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('save-app-chart-btn')?.addEventListener('click', () => {
         if (window.appUsageChart) {
             try {
-                // TĂNG ĐỘ PHÂN GIẢI: Thêm { scale: 2 } để ảnh rõ nét hơn
-                const imageBase64 = window.appUsageChart.toBase64Image({ scale: 2 });
+                // TĂNG ĐỘ PHÂN GIẢI: Thêm { scale: 3 } để ảnh rõ nét hơn
+                const imageBase64 = window.appUsageChart.toBase64Image({ scale: 3 });
                 
                 const link = document.createElement('a');
                 link.href = imageBase64;
