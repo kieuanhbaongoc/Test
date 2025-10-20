@@ -19,6 +19,8 @@ let userData = {
 };
 
 const todayIndex = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+// SỬA LỖI: Tạo một chỉ số ngày mới phù hợp với biểu đồ (0=Mon, 1=Tue, ..., 6=Sun)
+const chartDayIndex = (todayIndex + 6) % 7;
 
 const socialApps = [
     { id: 'facebook', name: 'Facebook', color: '#1877f2', iconClass: 'fa-brands fa-facebook' },
@@ -160,6 +162,7 @@ function checkActivityReset() {
         });
         
         // Check if user stayed under limit yesterday
+        // SỬA LỖI: Logic này đã đúng vì nó cũng dùng cách tính tương tự
         const yesterdayIndex = (yesterday.getDay() + 6) % 7; // Convert to 0=Mon, 1=Tue, ..., 6=Sun
         const yesterdayUsage = userData.weeklyData[yesterdayIndex] || 0;
         const userLimit = userData.limit || 60;
@@ -304,7 +307,8 @@ function initApp() {
 // Update Main Page UI
 function updateMainUI() {
     // Update dashboard
-    const totalUsageToday = userData.weeklyData[todayIndex] || 0;
+    // SỬA LỖI: Sử dụng chartDayIndex thay vì todayIndex
+    const totalUsageToday = userData.weeklyData[chartDayIndex] || 0;
     const currentUsageDisplay = document.getElementById('current-usage-display');
     if(currentUsageDisplay) currentUsageDisplay.textContent = `${totalUsageToday}p`;
     
@@ -334,7 +338,7 @@ function updateMainUI() {
                 <div class="app-icon" style="background-color: ${app.color || '#ccc'}">
                     <i class="${app.iconClass || 'fa-solid fa-plus'}"></i>
                 </div>
-                <input type="number" id="input-${app.id}" placeholder="${app.name} (phút)" value="${(userData.appUsage[app.id] && userData.appUsage[app.id][todayIndex]) || 0}" class="flex-grow rounded-lg px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="number" id="input-${app.id}" placeholder="${app.name} (phút)" value="${(userData.appUsage[app.id] && userData.appUsage[app.id][chartDayIndex]) || 0}" class="flex-grow rounded-lg px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
         `).join('');
     }
@@ -725,11 +729,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const input = document.getElementById(`input-${app.id}`);
             const value = parseInt(input?.value, 10) || 0;
             if (!userData.appUsage[app.id]) userData.appUsage[app.id] = Array(7).fill(0);
-            userData.appUsage[app.id][todayIndex] = value;
+            userData.appUsage[app.id][chartDayIndex] = value; // SỬA LỖI: dùng chartDayIndex
             totalUsage += value;
         });
 
-        userData.weeklyData[todayIndex] = totalUsage;
+        userData.weeklyData[chartDayIndex] = totalUsage; // SỬA LỖI: dùng chartDayIndex
         saveData();
         showNotification("Cập nhật thành công", `Tổng thời gian sử dụng hôm nay là ${totalUsage} phút.`);
         updateMainUI();
