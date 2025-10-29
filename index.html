@@ -129,13 +129,24 @@
 
             <!-- Countdown Timer Section -->
             <div id="countdown-section" class="countdown-timer rounded-xl p-4 mb-6 shadow-md">
-                <div class="flex items-center justify-between">
+                <!-- Bộ đếm ngược cho hoạt động hàng ngày -->
+                <div class="flex items-center justify-between mb-3">
                     <div>
                         <p class="text-sm font-medium text-blue-800">Đếm ngược đến reset hoạt động</p>
                         <p class="text-xs text-blue-600">Hoạt động lành mạnh sẽ được reset lúc 6:00 sáng</p>
                     </div>
                     <div class="text-2xl font-bold text-blue-800" id="countdown-timer">00:00:00</div>
                 </div>
+                
+                <!-- ===== THÊM MỚI: Bộ đếm ngược cho reset dữ liệu hàng tuần ===== -->
+                <div class="flex items-center justify-between border-t border-blue-200 pt-3">
+                    <div>
+                        <p class="text-sm font-medium text-indigo-800">Đếm ngược đến reset dữ liệu tuần</p>
+                        <p class="text-xs text-indigo-600">Biểu đồ sẽ được reset vào 6:00 sáng thứ Hai</p>
+                    </div>
+                    <div class="text-xl font-bold text-indigo-800" id="weekly-countdown-timer">0d 00:00:00</div>
+                </div>
+                <!-- ===== KẾT THÚC PHẦN THÊM VÀO ===== -->
             </div>
 
             <!-- Usage Dashboard Section -->
