@@ -143,6 +143,7 @@ function checkActivityReset() {
     const gmt7Hours = (now.getUTCHours() + 7) % 24;
     const gmt7Minutes = now.getUTCMinutes();
     
+    // --- PHẦN RESET HOẠT ĐỘNG HÀNG NGÀY ---
     // Check if it's 6:00 AM or later and we haven't reset today
     if (today !== lastResetDate && gmt7Hours >= 6) {
         // Save today's activities to history before reset
@@ -162,7 +163,6 @@ function checkActivityReset() {
         });
         
         // Check if user stayed under limit yesterday
-        // SỬA LỖI: Logic này đã đúng vì nó cũng dùng cách tính tương tự
         const yesterdayIndex = (yesterday.getDay() + 6) % 7; // Convert to 0=Mon, 1=Tue, ..., 6=Sun
         const yesterdayUsage = userData.weeklyData[yesterdayIndex] || 0;
         const userLimit = userData.limit || 60;
@@ -192,14 +192,31 @@ function checkActivityReset() {
         showNotification("Reset Hoạt Động", "Hoạt động lành mạnh đã được reset cho ngày mới!");
     }
 
-    // THAY ĐỔI MỚI: Reset dữ liệu hàng tuần vào 6h sáng thứ Hai
-    const gmt7Day = (now.getUTCDay() + 7) % 7; // 0=Sun, 1=Mon, ..., 6=Sat
-    if (gmt7Day === 1 && gmt7Hours >= 6 && userData.lastWeeklyResetDate !== today) {
-        userData.weeklyData = Array(7).fill(0);
-        userData.appUsage = {};
-        userData.lastWeeklyResetDate = today;
-        saveData();
-        console.log("Dữ liệu hàng tuần đã được reset.");
+    // --- PHẦN RESET DỮ LIỆU HÀNG TUẦN (ĐÃ SỬA LỖI) ---
+    // 1. Tìm ra ngày thứ Hai gần nhất
+    const dayOfWeek = now.getUTCDay(); // 0=Sun, 1=Mon, ...
+    const daysSinceLastMonday = (dayOfWeek + 6) % 7; // 0 if Mon, 1 if Tue, ...
+    const lastMondayDate = new Date(now);
+    lastMondayDate.setUTCDate(now.getUTCDate() - daysSinceLastMonday);
+    const lastMondayStr = lastMondayDate.toISOString().slice(0, 10);
+
+    // 2. Kiểm tra xem việc reset cho tuần này đã diễn ra chưa
+    if (userData.lastWeeklyResetDate !== lastMondayStr) {
+        // 3. Chỉ reset khi đã qua 6:00 sáng thứ Hai (giờ GMT+7)
+        const gmt7Day = (now.getUTCDay() + 7) % 7; // 0=Sun, 1=Mon, ...
+        const isAfterMondayDeadline = gmt7Day > 1 || (gmt7Day === 1 && gmt7Hours >= 6);
+
+        if (isAfterMondayDeadline) {
+            // Thực hiện reset dữ liệu tuần
+            userData.weeklyData = Array(7).fill(0);
+            userData.appUsage = {};
+            userData.lastWeeklyResetDate = lastMondayStr; // Lưu ngày của thứ Hai vừa reset
+            saveData();
+            console.log("Dữ liệu hàng tuần đã được reset.");
+            
+            // Thông báo cho người dùng
+            showNotification("Tuần Mới!", "Dữ liệu sử dụng tuần trước đã được reset. Chúc bạn một tuần mới hiệu quả!");
+        }
     }
 }
 
@@ -241,13 +258,61 @@ function updateCountdownTimer() {
     }
 }
 
+// ===== THÊM MỚI: Update weekly countdown timer to 6:00 AM GMT+7 on Monday =====
+function updateWeeklyCountdownTimer() {
+    const now = new Date();
+    
+    // Get current time in GMT+7
+    const gmt7Hours = (now.getUTCHours() + 7) % 24;
+    const gmt7Minutes = now.getUTCMinutes();
+    const gmt7Seconds = now.getUTCSeconds();
+    const gmt7Day = (now.getUTCDay() + 7) % 7; // 0=Sun, 1=Mon, ..., 6=Sat
+
+    // Calculate time until 6:00 AM GMT+7 on next Monday
+    let daysUntilReset = 0;
+    let hoursUntilReset = 0;
+    let minutesUntilReset = 0;
+    let secondsUntilReset = 0;
+
+    if (gmt7Day === 1 && gmt7Hours < 6) {
+        // Current time is before 6:00 AM on Monday
+        daysUntilReset = 0;
+        hoursUntilReset = 6 - gmt7Hours - 1;
+        minutesUntilReset = 60 - gmt7Minutes - 1;
+        secondsUntilReset = 60 - gmt7Seconds;
+    } else {
+        // Calculate days until next Monday
+        daysUntilReset = (7 - gmt7Day + 1) % 7 || 7; // If it's Monday after 6AM, this gives 7 days
+        hoursUntilReset = 24 - gmt7Hours + 6 - 1;
+        minutesUntilReset = 60 - gmt7Minutes - 1;
+        secondsUntilReset = 60 - gmt7Seconds;
+    }
+
+    // Format the time as Dd HH:MM:SS
+    const formattedTime = 
+        `${daysUntilReset}d ` +
+        String(hoursUntilReset).padStart(2, '0') + ':' +
+        String(minutesUntilReset).padStart(2, '0') + ':' +
+        String(secondsUntilReset).padStart(2, '0');
+    
+    const weeklyCountdownElement = document.getElementById('weekly-countdown-timer');
+    if (weeklyCountdownElement) {
+        weeklyCountdownElement.textContent = formattedTime;
+    }
+}
+// ===== KẾT THÚC PHẦN THÊM VÀO =====
+
 // Start countdown timer
 function startCountdownTimer() {
     // Update immediately
     updateCountdownTimer();
+    updateWeeklyCountdownTimer(); // THÊM DÒNG NÀY
     
     // Update every second
-    countdownInterval = setInterval(updateCountdownTimer, 1000);
+    countdownInterval = setInterval(() => {
+        updateCountdownTimer();
+        updateWeeklyCountdownTimer(); // THÊM DÒNG NÀY
+    }, 1000);
 }
 
 // Format date as dd/mm/yyyy
@@ -307,7 +372,6 @@ function initApp() {
 // Update Main Page UI
 function updateMainUI() {
     // Update dashboard
-    // SỬA LỖI: Sử dụng chartDayIndex thay vì todayIndex
     const totalUsageToday = userData.weeklyData[chartDayIndex] || 0;
     const currentUsageDisplay = document.getElementById('current-usage-display');
     if(currentUsageDisplay) currentUsageDisplay.textContent = `${totalUsageToday}p`;
@@ -407,7 +471,6 @@ function updateCharts() {
     window.appUsageChart = new Chart(appUsageChartCtx, {
         type: 'line',
         data: {
-            // THAY ĐỔI MỚI: Sắp xếp lại trục X để liền mạch từ Thứ Hai đến Chủ Nhật
             labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
             datasets: datasets
         },
@@ -430,7 +493,6 @@ function updateCharts() {
     window.weeklyUsageChart = new Chart(weeklyUsageChartCtx, {
         type: 'bar',
         data: {
-            // THAY ĐỔI MỚI: Sắp xếp lại trục X để liền mạch
             labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
             datasets: [
                 {
@@ -729,11 +791,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const input = document.getElementById(`input-${app.id}`);
             const value = parseInt(input?.value, 10) || 0;
             if (!userData.appUsage[app.id]) userData.appUsage[app.id] = Array(7).fill(0);
-            userData.appUsage[app.id][chartDayIndex] = value; // SỬA LỖI: dùng chartDayIndex
+            userData.appUsage[app.id][chartDayIndex] = value;
             totalUsage += value;
         });
 
-        userData.weeklyData[chartDayIndex] = totalUsage; // SỬA LỖI: dùng chartDayIndex
+        userData.weeklyData[chartDayIndex] = totalUsage;
         saveData();
         showNotification("Cập nhật thành công", `Tổng thời gian sử dụng hôm nay là ${totalUsage} phút.`);
         updateMainUI();
@@ -960,27 +1022,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // THÊM MỚI: Event Listener cho nút lưu biểu đồ tuần (ĐÃ CẬP NHẬT ĐỘ PHÂN GIẢI)
+    // CẬP NHẬT: Event Listener cho nút lưu biểu đồ tuần (TĂNG ĐỘ PHÂN GIẢI LÊN 3X)
     document.getElementById('save-weekly-chart-btn')?.addEventListener('click', () => {
         if (window.weeklyUsageChart) {
             try {
-                // CẬP NHẬT: Tăng độ phân giải lên 33x
+                // TĂNG ĐỘ PHÂN GIẢI: Thay đổi scale từ 2 lên 3 để chất lượng cao hơn
                 const imageBase64 = window.weeklyUsageChart.toBase64Image({ scale: 3 });
                 
-                // Tạo một thẻ <a> tạm thời để tải file
                 const link = document.createElement('a');
                 link.href = imageBase64;
                 
-                // Tạo tên file có ngày tháng
                 const today = new Date().toISOString().slice(0, 10);
                 link.download = `bieu-do-tuan-${today}.png`;
                 
-                // Kích hoạt động việc tải về
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
                 
-                showNotification("Thành công!", "Biểu đồ tuần đã được lưu thành công.");
+                showNotification("Thành công!", "Biểu đồ tuần đã được lưu thành công với chất lượng cao.");
             } catch (error) {
                 console.error("Lỗi khi lưu biểu đồ:", error);
                 showNotification("Lỗi", "Không thể lưu biểu đồ. Vui lòng thử lại.");
@@ -990,11 +1049,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // ===== THÊM MỚI: Event Listener cho nút lưu biểu đồ ứng dụng =====
+    // ===== CẬP NHẬT: Event Listener cho nút lưu biểu đồ ứng dụng (TĂNG ĐỘ PHÂN GIẢI LÊN 3X) =====
     document.getElementById('save-app-chart-btn')?.addEventListener('click', () => {
         if (window.appUsageChart) {
             try {
-                // TĂNG ĐỘ PHÂN GIẢI: Thêm { scale: 3 } để ảnh rõ nét hơn
+                // TĂNG ĐỘ PHÂN GIẢI: Thay đổi scale từ 2 lên 3 để chất lượng cao hơn
                 const imageBase64 = window.appUsageChart.toBase64Image({ scale: 3 });
                 
                 const link = document.createElement('a');
@@ -1007,7 +1066,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.click();
                 document.body.removeChild(link);
                 
-                showNotification("Thành công!", "Biểu đồ sử dụng theo ứng dụng đã được lưu.");
+                showNotification("Thành công!", "Biểu đồ sử dụng theo ứng dụng đã được lưu với chất lượng cao.");
             } catch (error) {
                 console.error("Lỗi khi lưu biểu đồ:", error);
                 showNotification("Lỗi", "Không thể lưu biểu đồ. Vui lòng thử lại.");
@@ -1016,7 +1075,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showNotification("Lỗi", "Biểu đồ chưa sẵn sàng để lưu.");
         }
     });
-    // ===== KẾT THÚC ĐOẠN CODE THÊM VÀO =====
+    // ===== KẾT THÚC ĐOẠN CODE CẬP NHẬT =====
 
     // Initialize badges on first visit
     if (Object.keys(userData.badges).length === 0) {
